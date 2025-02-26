@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import axios from "axios";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
   const [statusColor, setStatusColor] = useState("text-gray-700");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -12,26 +14,28 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setStatus("Sending...");
     setStatusColor("text-gray-700");
+
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
+      const response = await axios.post("/api/contact", formData, {
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
       });
-      const data = await response.json();
-      if (response.ok) {
+
+      if (response.status === 200) {
         setStatus("Message sent successfully!");
         setStatusColor("text-green-500");
         setFormData({ name: "", email: "", message: "" });
       } else {
-        setStatus(`Error: ${data.message}`);
+        setStatus("Something went wrong. Please try again.");
         setStatusColor("text-red-500");
       }
-    } catch (error) {
-      setStatus("Failed to send message.");
+    } catch {
+      setStatus("Failed to send message. Please check your connection.");
       setStatusColor("text-red-500");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,7 +56,7 @@ export default function Contact() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Have a project in mind? Let's build something great together. Fill out the form below, and I'll get back to you soon.
+        Have a project in mind? Let&apos;s build something great together. Fill out the form below, and I&apos;ll get back to you soon.
       </motion.p>
 
       <motion.form
@@ -103,11 +107,14 @@ export default function Contact() {
 
         <motion.button
           type="submit"
-          className="w-full bg-yellow-500 text-white font-semibold py-3 rounded-lg hover:bg-yellow-600 transition-all duration-300"
+          className={`w-full bg-yellow-500 text-white font-semibold py-3 rounded-lg hover:bg-yellow-600 transition-all duration-300 ${
+            loading ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          disabled={loading}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Send Message
+          {loading ? "Sending..." : "Send Message"}
         </motion.button>
 
         {status && (
