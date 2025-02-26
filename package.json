@@ -13,6 +13,7 @@
   "dev-server": "cd backend && npm start",
   "dev-client": "cd frontend && npm run dev",
   "build": "cd frontend && npm install && npm run build",
+  "heroku-postbuild": "cd frontend && npm install && npm run build",
   "start": "cd backend && npm start"
 },
 
