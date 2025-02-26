@@ -11,10 +11,10 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-    origin: 'https://ankitkumarverma.netlify.app/',
-    credentials: true,
-  })
-);
+  origin: "https://ankitkumarverma.netlify.app", // Replace with your Netlify URL
+  methods: ["GET", "POST"],
+  credentials: true
+}));
 app.use(bodyParser.json());
 
 // Nodemailer transporter setup

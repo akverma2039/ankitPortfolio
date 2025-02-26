@@ -19,9 +19,13 @@ export default function Contact() {
     setStatusColor("text-gray-700");
 
     try {
-      const response = await axios.post("https://theankitkumarverma.onrender.com/contact", formData, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/contact`,
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       if (response.status === 200) {
         setStatus("Message sent successfully!");
