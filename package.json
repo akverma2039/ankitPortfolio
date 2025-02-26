@@ -12,7 +12,7 @@
     "dev": "npm-run-all --parallel dev-server dev-client",
     "dev-server": "cd backend && npm start",
     "dev-client": "cd frontend && npm start",
-    "heroku-postbuild": "cd frontend && npm install && npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --include=dev && npm run build",
     "start": "cd backend && npm start"
   },
   "dependencies": {
