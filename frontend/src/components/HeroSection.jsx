@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-import ankitProfile from "../images/ankit2.jpg"; // Adjust the path as per your file structure
+import ankitProfile from "../images/ankit2.jpeg"; // Adjust the path as per your file structure
 
 export default function HeroSection() {
   const navigate = useNavigate(); // Initialize useNavigate
