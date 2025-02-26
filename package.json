@@ -6,8 +6,8 @@
   "license": "ISC",
   "type": "commonjs",
   "scripts": {
-    "install-client": "cd client && npm install",
-    "install-server": "cd server && npm install",
+    "install-client": "cd frontend && npm install",
+    "install-server": "cd backend && npm install",
     "install-all": "npm-run-all --parallel install-client install-server",
     "dev": "npm-run-all --parallel dev-server dev-client",
     "dev-server": "cd server && npm start",
