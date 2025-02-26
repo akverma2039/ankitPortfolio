@@ -19,7 +19,7 @@ export default function Contact() {
     setStatusColor("text-gray-700");
 
     try {
-      const response = await axios.post("/api/contact", formData, {
+      const response = await axios.post("https://theankitkumarverma.onrender.com/contact", formData, {
         headers: { "Content-Type": "application/json" },
       });
 
